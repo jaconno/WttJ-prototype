@@ -276,6 +276,90 @@ a { color: inherit; }
 .apply-context { font-size: 14px; color: var(--color-text-tertiary); }
 .apply-actions { display: flex; align-items: center; gap: 12px; }
 .apply-actions .btn { padding: 0 28px; }
+
+/* ============================================================
+   TAB PANELS — Job vs Company. Switched by the only JS on the
+   page (showTab). A panel is just a .body-wrap; hide with [hidden].
+   ============================================================ */
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+
+/* ============================================================
+   COMPANY PAGE LAYOUT
+   Main content column + sticky "Jump to section" rail.
+   Each section is still a self-contained .block (reorderable).
+   ============================================================ */
+.company-layout { max-width: var(--content-max); margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: 1fr 230px; gap: 28px; align-items: start; }
+.company-main { min-width: 0; }
+.company-main .section-title { margin-bottom: var(--space-3); }
+/* anchor offset so jump-links don't hide titles under the sticky nav */
+.company-main .block { scroll-margin-top: 90px; }
+
+/* Jump-to-section rail */
+.jump-card { position: sticky; top: 16px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-4) 0; box-shadow: var(--elevation-10); }
+.jump-title { font-family: var(--font-title); font-weight: 700; font-size: 15px; color: var(--color-text-primary); padding: 0 var(--space-6) var(--space-3); }
+.jump-list { list-style: none; margin: 0; padding: 0; }
+.jump-list a { display: block; font-size: 14px; color: var(--color-text-tertiary); text-decoration: none; padding: 9px var(--space-6); border-left: 3px solid transparent; }
+.jump-list a:hover { color: var(--color-text-primary); background: var(--color-surface-warm); }
+.jump-list a.active { color: var(--color-text-primary); font-weight: 600; border-left-color: var(--color-brand); }
+
+/* Simple lead-in paragraph under a heading */
+.lead { font-size: 15px; color: var(--color-text-secondary); }
+
+/* Values list — bold lead-in then description */
+.values-list { list-style: none; margin: 0; padding: 0; }
+.values-list li { position: relative; padding-left: 18px; margin-bottom: 14px; font-size: 15px; line-height: 1.55; color: var(--color-text-secondary); }
+.values-list li::before { content: ""; position: absolute; left: 2px; top: 9px; width: 5px; height: 5px; border-radius: var(--radius-full); background: var(--color-text-muted); }
+.values-list .v-name { font-weight: 700; color: var(--color-text-primary); }
+
+/* People (leadership / progression) */
+.person { margin-bottom: var(--space-6); }
+.person:last-child { margin-bottom: 0; }
+.person-name { font-weight: 700; font-size: 15px; color: var(--color-text-primary); }
+.person-name .u { text-decoration: underline; text-underline-offset: 2px; }
+.person-title { font-size: 14px; color: var(--color-text-tertiary); }
+.person-bio { font-size: 15px; line-height: 1.6; color: var(--color-text-secondary); margin-top: 6px; }
+.person-row { display: flex; gap: 10px; align-items: flex-start; }
+.person-row .avatar-sm { width: 30px; height: 30px; border-radius: var(--radius-full); flex: none; background: var(--color-surface-neutral); }
+
+/* Funding (company variant): timeline + total box side by side */
+.funding-flex { display: grid; grid-template-columns: 1fr 200px; gap: 16px; align-items: stretch; }
+.total-box { background: var(--color-surface-neutral); border-radius: var(--radius-md); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 16px; }
+.total-box .big { font-family: var(--font-title); font-weight: 900; font-size: 24px; color: var(--color-text-primary); }
+.total-box .lbl { font-size: 13px; color: var(--color-text-tertiary); margin-top: 2px; }
+.investors { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--color-text-secondary); margin-top: 16px; }
+.investors svg { width: 16px; height: 16px; color: var(--color-success-strong); flex: none; }
+
+/* DEI prose */
+.dei-prose { font-size: 15px; line-height: 1.65; color: var(--color-text-secondary); }
+.dei-prose strong { color: var(--color-text-primary); }
+
+/* Office map (stylised static placeholder) */
+.map-embed { border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--color-border); }
+.map-embed svg { width: 100%; height: 200px; display: block; }
+.office-addr { font-size: 14px; color: var(--color-text-secondary); margin-top: 12px; }
+
+/* Articles */
+.article-link { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; color: var(--color-text-secondary); text-decoration: none; padding: 10px 0; }
+.article-link:hover { color: var(--color-text-primary); }
+.article-link span:first-child { line-height: 1.5; }
+.article-link .a-ico { flex: none; margin-top: 2px; }
+.article-link .a-ico svg { width: 15px; height: 15px; color: var(--color-text-tertiary); }
+.article-link .a-text { text-decoration: underline; text-underline-offset: 2px; }
+
+/* Jobs list */
+.jobs-head { display: flex; align-items: center; justify-content: space-between; }
+.select-pill { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: var(--color-text-secondary); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-full); padding: 6px 12px; cursor: pointer; }
+.select-pill svg { width: 12px; height: 12px; }
+.jobs-group { margin-top: var(--space-6); }
+.jobs-group .grp-name { font-weight: 700; font-size: 15px; color: var(--color-text-primary); margin-bottom: 6px; }
+.job-link { display: block; font-size: 15px; color: var(--color-text-secondary); text-decoration: underline; text-underline-offset: 2px; padding: 6px 0; }
+.job-link:hover { color: var(--color-text-primary); }
+
+/* Photos */
+.photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.photo { aspect-ratio: 3 / 4; border-radius: var(--radius-md); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.photo svg, .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 </style>
 </head>
 <body>
@@ -415,11 +499,11 @@ a { color: inherit; }
 <!-- ===== TAB BAR ===== -->
 <div class="tabbar">
   <div class="tabbar-inner">
-    <button class="tab active" type="button">
+    <button class="tab active" type="button" id="tab-job" onclick="showTab('job')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
       Job
     </button>
-    <button class="tab" type="button">
+    <button class="tab" type="button" id="tab-company" onclick="showTab('company')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1.5"/><line x1="8" y1="7" x2="12" y2="7"/><line x1="8" y1="11" x2="12" y2="11"/><line x1="8" y1="15" x2="12" y2="15"/></svg>
       Company
     </button>
@@ -427,7 +511,7 @@ a { color: inherit; }
 </div>
 
 <!-- ===== BODY (two columns on warm beige) ===== -->
-<div class="body-wrap">
+<div class="body-wrap" id="panel-job">
   <div class="layout">
 
     <!-- =========================================================
@@ -609,6 +693,283 @@ a { color: inherit; }
   </div>
 </div>
 
+<!-- =============================================================
+     COMPANY PANEL — shown when the Company tab is active.
+     Main column of stacked .block sections + sticky jump rail.
+     ============================================================= -->
+<div class="body-wrap" id="panel-company" hidden>
+  <div class="company-layout">
+
+    <!-- MAIN COLUMN -->
+    <div class="company-main">
+
+      <!-- ===== COMPANY: MISSION ===== -->
+      <section class="block" id="sec-mission">
+        <div class="card">
+          <h3 class="section-title">Company mission</h3>
+          <p class="lead">We are reinventing animal care.</p>
+        </div>
+      </section>
+
+      <!-- ===== COMPANY: OUR TAKE ===== -->
+      <section class="block" id="sec-our-take">
+        <div class="card">
+          <h3 class="section-title">Our take
+            <span class="funding-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="8" r="0.6" fill="currentColor"/></svg></span>
+          </h3>
+          <div class="prose">
+            <p>Lupa addresses the challenges of pet care service providers and pet parents in an industry where managing appointments, client engagement, and care provisions can be daunting. With its integrated platform, Lupa streamlines practice management and enhances client interactions, replacing fragmented systems and manual tasks.</p>
+            <p>Lupa leverages AI integration in pet care, automating tasks, offering personalised insights, and providing proactive support for providers and pet parents. Through features like online booking and AI-driven veterinary advice, Lupa simplifies operations and enhances pet care standards, setting a new industry benchmark.</p>
+            <p>It's a comprehensive solution to the challenges in pet care management, replacing fragmented systems with its integrated platform. By streamlining practice management and client engagement, Lupa eases burdens for businesses and enhances the pet ownership experience.</p>
+          </div>
+          <div class="author">
+            <img class="avatar" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='44' height='44'&gt;&lt;rect width='44' height='44' fill='%23EAE4DE'/&gt;&lt;circle cx='22' cy='17' r='8' fill='%23A7A096'/&gt;&lt;path d='M6 44c0-9 8-13 16-13s16 4 16 13' fill='%23A7A096'/&gt;&lt;/svg&gt;" alt="Freddie">
+            <div>
+              <div class="name">Freddie</div>
+              <div class="role">Company Specialist at Welcome to the Jungle</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== COMPANY: BENEFITS ===== -->
+      <section class="block" id="sec-benefits">
+        <div class="card">
+          <h3 class="section-title">Benefits</h3>
+          <ul class="bullet-list emoji">
+            <li><span class="em">💜</span>Private Medical Insurance - AXA</li>
+            <li><span class="em">📈</span>Equity for all employees, without exception</li>
+            <li><span class="em">💻</span>Brand New Equipment - MacBook Air M4 hardware</li>
+            <li><span class="em">🧘</span>Personal Therapist - Unlimited therapy sessions</li>
+            <li><span class="em">☕</span>Free barista coffee and beer on tap</li>
+            <li><span class="em">🌴</span>Annual team trip abroad, monthly team socials</li>
+            <li><span class="em">🏋️</span>Subsidised gym membership</li>
+            <li><span class="em">💰</span>Pension contributions</li>
+            <li><span class="em">👶</span>Workplace Nursery Scheme</li>
+            <li><span class="em">🦷</span>Private Dental Scheme</li>
+            <li><span class="em">🍽️</span>Heavily subsided nightly Dinners</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ===== COMPANY: VALUES ===== -->
+      <section class="block" id="sec-values">
+        <div class="card">
+          <h3 class="section-title">Company values</h3>
+          <ul class="values-list">
+            <li><span class="v-name">FALL IN LOVE, EVERY DAY</span> – We encourage you to shape your role, so you find meaning and fulfilment in your work, everyday.</li>
+            <li><span class="v-name">OWN IT LIKE IT'S YOURS</span> – We believe in true ownership – holding yourself accountable, delivering with pride, and knowing your effort is recognised and shapes our collective success.</li>
+            <li><span class="v-name">TRUST YOUR GUT</span> – We trust you to lead with confidence, act on intuition and experience, and own your decisions.</li>
+            <li><span class="v-name">BE BOLD</span> – At Lupa, we encourage bold thinking and fresh ideas – we push boundaries to build solutions</li>
+            <li><span class="v-name">ACT WITH EXTREME URGENCY</span> – We move quickly and carefully, with purpose. Every decision and action drives real impact in this company.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ===== COMPANY: FUNDING ===== -->
+      <section class="block" id="sec-funding">
+        <div class="card">
+          <h3 class="section-title">Funding (last 2 of 3 rounds)
+            <span class="funding-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="8" r="0.6" fill="currentColor"/></svg></span>
+          </h3>
+          <div class="funding-flex">
+            <div class="timeline">
+              <div class="timeline-row">
+                <span class="date">Oct 2025</span>
+                <span class="dot"></span>
+                <span class="amount">£15.1m</span>
+                <span class="tag tag-blue">SERIES A</span>
+              </div>
+              <div class="timeline-row">
+                <span class="date">Jan 2025</span>
+                <span class="dot"></span>
+                <span class="amount">£3.3m</span>
+                <span class="tag tag-blue">SEED</span>
+              </div>
+            </div>
+            <div class="total-box">
+              <span class="big">£19.2m</span>
+              <span class="lbl">Total funding</span>
+            </div>
+          </div>
+          <div class="investors">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            This company has top investors
+            <span class="funding-info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="8" r="0.6" fill="currentColor"/></svg></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== COMPANY: LEADERSHIP ===== -->
+      <section class="block" id="sec-leadership">
+        <div class="card">
+          <h3 class="section-title">Leadership</h3>
+          <div class="person">
+            <div class="person-name"><span class="u">Nicolò Frisiani</span> <span class="person-title">(CEO)</span></div>
+            <p class="person-bio">Graduated from the Imperial College London with an MSc in Machine Learning. Previously worked as a Senior Associate and Consultant at Boston Consulting Group and as a Senior Data Scientist at BCG GAMMA.</p>
+          </div>
+          <div class="person">
+            <div class="person-name"><span class="u">Matei Ifrim</span> <span class="person-title">(COO)</span></div>
+            <p class="person-bio">Graduated from the London School of Economics and Political Sciences with an MSc in Management. Previously worked at Boston Consulting Group as a Senior Associate and Consultant.</p>
+          </div>
+          <div class="person">
+            <div class="person-name"><span class="u">Raul Lozano Martin</span> <span class="person-title">(CTO)</span></div>
+            <p class="person-bio">Graduated from the University of Manchester with a BS in Computer Science. Previously worked as a Software Engineer at Skyscanner and Meta.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== COMPANY: PEOPLE PROGRESSING ===== -->
+      <section class="block" id="sec-progressing">
+        <div class="card">
+          <h3 class="section-title">People progressing</h3>
+          <div class="person">
+            <div class="person-name"><span class="u">Giulio Tiberio</span></div>
+            <p class="person-bio">🚀 As one of our first hires, Giulio has done everything from sales to deployment, and now drives high level projects, bridging the gap between strategy and operational teams.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== COMPANY: DIVERSITY, EQUITY & INCLUSION ===== -->
+      <section class="block" id="sec-dei">
+        <div class="card">
+          <h3 class="section-title">Diversity, Equity &amp; Inclusion at Lupa</h3>
+          <div class="person-row" style="margin-bottom:12px;">
+            <img class="avatar-sm" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='30' height='30'&gt;&lt;rect width='30' height='30' fill='%23EAE4DE'/&gt;&lt;circle cx='15' cy='12' r='5' fill='%23A7A096'/&gt;&lt;path d='M3 30c0-6 6-9 12-9s12 3 12 9' fill='%23A7A096'/&gt;&lt;/svg&gt;" alt="Dan">
+            <div>
+              <div class="person-name">Dan</div>
+              <div class="person-title">(Head of People)</div>
+            </div>
+          </div>
+          <div class="dei-prose">
+            <p style="margin-bottom:12px;"><strong>Our Vision</strong> To build a pack that's as diverse as the pets (and people!) we serve, where everyone feels valued, supported, and empowered to thrive.</p>
+            <p style="margin-bottom:8px;"><strong>Our Commitments</strong></p>
+            <p style="margin-bottom:8px;"><strong>1. Inclusive Hiring</strong> Write job descriptions that focus on skills and potential, not just traditional credentials. Partner with diverse job boards and communities. Use structured interviews and diverse panels to reduce bias.</p>
+            <p><strong>2. Representation in Product &amp; Community</strong> Involve a wide range of perspectives in product testing, vets, tech teams, clients, and pet owners from different backgrounds. Partner with animal welfare and tech organisations that support accessibility and inclusion.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== COMPANY: OFFICE ===== -->
+      <section class="block" id="sec-office">
+        <div class="card">
+          <h3 class="section-title">Office</h3>
+          <div class="map-embed">
+            <svg viewBox="0 0 600 200" role="img" aria-label="Map of office location">
+              <rect width="600" height="200" fill="#E8EDE6"/>
+              <!-- water -->
+              <path d="M0 120 Q150 90 300 120 T600 110 V200 H0 Z" fill="#AED4E6" opacity="0.5"/>
+              <!-- roads -->
+              <g stroke="#FFFFFF" stroke-width="7" fill="none">
+                <path d="M-10 70 L250 60 L420 95 L610 80"/>
+                <path d="M120 -10 L150 90 L130 210"/>
+                <path d="M330 -10 L300 120 L320 210"/>
+                <path d="M-10 150 L600 160"/>
+                <path d="M450 -10 L470 130 L460 210"/>
+              </g>
+              <g stroke="#F4D58D" stroke-width="3" fill="none">
+                <path d="M-10 70 L250 60 L420 95 L610 80"/>
+                <path d="M330 -10 L300 120 L320 210"/>
+              </g>
+              <!-- blocks -->
+              <g fill="#DDE3DA">
+                <rect x="180" y="75" width="90" height="55" rx="3"/>
+                <rect x="340" y="30" width="80" height="45" rx="3"/>
+                <rect x="480" y="40" width="70" height="60" rx="3"/>
+              </g>
+              <!-- pin -->
+              <g transform="translate(290 70)">
+                <path d="M0 36 C-12 18 -12 0 0 0 C12 0 12 18 0 36 Z" fill="#E1003A" transform="translate(0 -36)"/>
+                <circle cx="0" cy="-24" r="5" fill="#FFFFFF"/>
+              </g>
+            </svg>
+          </div>
+          <p class="office-addr">5 Merchant Square, W2 1AY, London, England, United Kingdom</p>
+        </div>
+      </section>
+
+      <!-- ===== COMPANY: ARTICLES ===== -->
+      <section class="block" id="sec-articles">
+        <div class="card">
+          <h3 class="section-title">Articles</h3>
+          <a class="article-link" href="#"><span class="a-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13a2 2 0 0 1 2 2v12H6a2 2 0 0 1-2-2z"/><line x1="8" y1="9" x2="15" y2="9"/><line x1="8" y1="13" x2="15" y2="13"/></svg></span><span class="a-text">Top 10 Angel Invested Startups Globally</span></a>
+          <a class="article-link" href="#"><span class="a-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13a2 2 0 0 1 2 2v12H6a2 2 0 0 1-2-2z"/><line x1="8" y1="9" x2="15" y2="9"/><line x1="8" y1="13" x2="15" y2="13"/></svg></span><span class="a-text">Interview with Nicolo Frisiani, Co-Founder and CEO of Lupa Pets</span></a>
+          <a class="article-link" href="#"><span class="a-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13a2 2 0 0 1 2 2v12H6a2 2 0 0 1-2-2z"/><line x1="8" y1="9" x2="15" y2="9"/><line x1="8" y1="13" x2="15" y2="13"/></svg></span><span class="a-text">Lupa Raises $20M at Series A to Bring Innovative Tech and AI to the Veterinary Profession</span></a>
+        </div>
+      </section>
+
+      <!-- ===== COMPANY: JOBS ===== -->
+      <section class="block" id="sec-jobs">
+        <div class="card">
+          <div class="jobs-head">
+            <h3 class="section-title" style="margin-bottom:0;">Jobs (6)</h3>
+            <button class="select-pill" type="button">All locations
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+          </div>
+          <div class="jobs-group">
+            <div class="grp-name">Software Engineering</div>
+            <a class="job-link" href="#">Senior Software Engineer</a>
+          </div>
+          <div class="jobs-group">
+            <div class="grp-name">Operations &amp; Strategy</div>
+            <a class="job-link" href="#">Customer Support (Customer Experience Team)</a>
+            <a class="job-link" href="#">Operations Associate</a>
+          </div>
+          <div class="jobs-group">
+            <div class="grp-name">Product</div>
+            <a class="job-link" href="#">Product Manager (Generous Equity!!)</a>
+          </div>
+          <div class="jobs-group">
+            <div class="grp-name">Sales &amp; Account Management</div>
+            <a class="job-link" href="#">Customer Success (Customer Experience Team :))</a>
+            <a class="job-link" href="#">Sales Development Representative (Equity)</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== COMPANY: PHOTOS ===== -->
+      <section class="block" id="sec-photos">
+        <div class="card">
+          <div class="photos">
+            <div class="photo">
+              <svg viewBox="0 0 120 160" aria-label="Team at an event"><rect width="120" height="160" fill="#6B4FA0"/><rect x="14" y="14" width="92" height="22" rx="4" fill="#FFFFFF" opacity="0.9"/><text x="60" y="30" font-family="Work Sans" font-size="12" font-weight="700" fill="#6B4FA0" text-anchor="middle">Lupa</text><g fill="#D8C7F0"><circle cx="40" cy="92" r="14"/><circle cx="80" cy="92" r="14"/></g><path d="M22 160 C22 130 58 130 58 160 Z" fill="#C9B2EC"/><path d="M62 160 C62 130 98 130 98 160 Z" fill="#C9B2EC"/></svg>
+            </div>
+            <div class="photo">
+              <svg viewBox="0 0 120 160" aria-label="Lupa brand"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFCD00"/><stop offset="1" stop-color="#9B4DFF"/></linearGradient></defs><rect width="120" height="160" fill="url(#g1)"/><path d="M40 110 V58 c0-4 5-6 8-3 l12 11 12-11 c3-3 8-1 8 3 v52" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="photo">
+              <svg viewBox="0 0 120 160" aria-label="A cat"><rect width="120" height="160" fill="#EAE4DE"/><ellipse cx="60" cy="120" rx="34" ry="30" fill="#B59B7A"/><circle cx="60" cy="78" r="28" fill="#C8AE8B"/><path d="M38 60 L34 38 L52 54 Z" fill="#C8AE8B"/><path d="M82 60 L86 38 L68 54 Z" fill="#C8AE8B"/><circle cx="51" cy="78" r="3.5" fill="#3A2E22"/><circle cx="69" cy="78" r="3.5" fill="#3A2E22"/><path d="M57 88 q3 3 6 0" stroke="#3A2E22" stroke-width="2" fill="none"/></svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- JUMP-TO-SECTION RAIL -->
+    <aside>
+      <nav class="jump-card" aria-label="Jump to section">
+        <div class="jump-title">Jump to section</div>
+        <ul class="jump-list">
+          <li><a class="active" href="#sec-mission">Company mission</a></li>
+          <li><a href="#sec-our-take">Our take</a></li>
+          <li><a href="#sec-benefits">Benefits</a></li>
+          <li><a href="#sec-values">Values</a></li>
+          <li><a href="#sec-funding">Funding</a></li>
+          <li><a href="#sec-leadership">Leadership and people</a></li>
+          <li><a href="#sec-dei">Diversity, equity and inclusion</a></li>
+          <li><a href="#sec-office">Office</a></li>
+          <li><a href="#sec-articles">Articles</a></li>
+          <li><a href="#sec-jobs">Jobs</a></li>
+          <li><a href="#sec-photos">Photos</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+  </div>
+</div>
+
 <!-- ===== STICKY APPLY / SAVE BAR (fixed bottom) ===== -->
 <div class="apply-bar">
   <div class="apply-bar-inner">
@@ -645,6 +1006,41 @@ a { color: inherit; }
   </div>
 </section>
 -->
+
+<!-- =============================================================
+     The ONLY script on the page: switch between the Job and
+     Company tab panels, and highlight the active jump link.
+     Everything else stays inert.
+     ============================================================= -->
+<script>
+  function showTab(which) {
+    var isJob = which === 'job';
+    document.getElementById('panel-job').hidden = !isJob;
+    document.getElementById('panel-company').hidden = isJob;
+    document.getElementById('tab-job').classList.toggle('active', isJob);
+    document.getElementById('tab-company').classList.toggle('active', !isJob);
+    window.scrollTo({ top: 0 });
+  }
+
+  // Highlight the jump-rail link matching the section in view.
+  var jumpLinks = Array.prototype.slice.call(document.querySelectorAll('.jump-list a'));
+  if (jumpLinks.length && 'IntersectionObserver' in window) {
+    var byId = {};
+    jumpLinks.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting && byId[e.target.id]) {
+          jumpLinks.forEach(function (a) { a.classList.remove('active'); });
+          byId[e.target.id].classList.add('active');
+        }
+      });
+    }, { rootMargin: '-80px 0px -65% 0px' });
+    Object.keys(byId).forEach(function (id) {
+      var sec = document.getElementById(id);
+      if (sec) obs.observe(sec);
+    });
+  }
+</script>
 
 </body>
 </html>
