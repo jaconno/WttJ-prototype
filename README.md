@@ -1,2 +1,2 @@
-# WTTF-prototype
+# WttJ-prototype
 Lightweight prototype for ideation
